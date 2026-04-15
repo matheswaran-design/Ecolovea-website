@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecolovea | Cart</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-disclaimer">
+    This website is for educational purposes only.
+  </div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">Ecolovea</a>
+
+      <nav class="nav" id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html" class="active">Cart <span id="cartCount" class="cart-count">0</span></a>
+        <a href="about.html">About</a>
+        <a href="login.html">Login</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container cart-layout">
+      <section class="cart-panel">
+        <div class="section-title left-align">
+          <h1>Your Cart</h1>
+          <p>Review and update your selected eco-friendly products.</p>
+        </div>
+
+        <div id="cartItems" class="cart-items"></div>
+
+        <div id="emptyCart" class="empty-state hidden">
+          <p>Your cart is empty.</p>
+          <a href="products.html" class="btn btn-primary">Shop Now</a>
+        </div>
+      </section>
+
+      <aside class="summary-panel">
+        <h2>Order Summary</h2>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="subtotal">RM 0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery</span>
+          <span id="deliveryFee">RM 5.00</span>
+        </div>
+        <div class="summary-row total-row">
+          <span>Total</span>
+          <span id="totalPrice">RM 0.00</span>
+        </div>
+
+        <a href="checkout.html" class="btn btn-primary full-width">Proceed to Checkout</a>
+        <button class="btn btn-secondary full-width" onclick="clearCart()">Clear Cart</button>
+
+        <p class="small-note">
+          Secure payment preview only. No real transaction will be processed.
+        </p>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Ecolovea</h3>
+        <p>Affordable eco-friendly essentials for greener everyday living.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="products.html">Products</a>
+        <a href="checkout.html">Checkout</a>
+        <a href="about.html">About</a>
+      </div>
+      <div>
+        <h4>Notice</h4>
+        <p>This website is for educational purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
