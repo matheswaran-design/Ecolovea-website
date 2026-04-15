@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecolovea | Products</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-disclaimer">
+    This website is for educational purposes only.
+  </div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">Ecolovea</a>
+
+      <nav class="nav" id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="cart.html">Cart <span id="cartCount" class="cart-count">0</span></a>
+        <a href="about.html">About</a>
+        <a href="login.html">Login</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1>Our Eco-Friendly Products</h1>
+        <p>
+          Affordable, reusable, and practical products carefully selected for students,
+          working adults, and small business owners.
+        </p>
+      </div>
+
+      <div class="product-grid product-page-grid">
+        <article class="product-card">
+          <img src="https://images.unsplash.com/photo-1584346133934-a3afd2a33c4a?auto=format&fit=crop&w=800&q=80" alt="Bamboo cutlery set" />
+          <div class="product-info">
+            <h3>Bamboo Cutlery Set</h3>
+            <p class="price">RM 12.00</p>
+            <p class="small-text">1 fork, 1 spoon, 1 knife</p>
+            <div class="quantity-wrap">
+              <button onclick="changeQty('qty1', -1)">−</button>
+              <span id="qty1">1</span>
+              <button onclick="changeQty('qty1', 1)">+</button>
+            </div>
+            <button class="btn btn-primary" onclick="addFromQty('Bamboo Cutlery Set', 12, 'qty1', 'https://images.unsplash.com/photo-1584346133934-a3afd2a33c4a?auto=format&fit=crop&w=800&q=80')">Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80" alt="Stainless steel straw set" />
+          <div class="product-info">
+            <h3>Stainless Steel Straw Set</h3>
+            <p class="price">RM 10.00</p>
+            <p class="small-text">2 metal straws + 1 brush</p>
+            <div class="quantity-wrap">
+              <button onclick="changeQty('qty2', -1)">−</button>
+              <span id="qty2">1</span>
+              <button onclick="changeQty('qty2', 1)">+</button>
+            </div>
+            <button class="btn btn-primary" onclick="addFromQty('Stainless Steel Straw Set', 10, 'qty2', 'https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80')">Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80" alt="Glass food storage container" />
+          <div class="product-info">
+            <h3>Glass Food Storage Container</h3>
+            <p class="price">RM 22.00</p>
+            <p class="small-text">Reusable food storage for daily use</p>
+            <div class="quantity-wrap">
+              <button onclick="changeQty('qty3', -1)">−</button>
+              <span id="qty3">1</span>
+              <button onclick="changeQty('qty3', 1)">+</button>
+            </div>
+            <button class="btn btn-primary" onclick="addFromQty('Glass Food Storage Container', 22, 'qty3', 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80')">Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="
+        <article class="product-card">
+          <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80" alt="Glass water bottle" />
+          <div class="product-info">
+            <h3>Glass Water Bottle</h3>
+            <p class="price">RM 20.00</p>
+            <p class="small-text">Reusable BPA-free bottle</p>
+            <div class="quantity-wrap">
+              <button onclick="changeQty('qty4', -1)">−</button>
+              <span id="qty4">1</span>
+              <button onclick="changeQty('qty4', 1)">+</button>
+            </div>
+            <button class="btn btn-primary" onclick="addFromQty('Glass Water Bottle', 20, 'qty4', 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80')">Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Areca leaf plates" />
+          <div class="product-info">
+            <h3>Areca Leaf Plates</h3>
+            <p class="price">RM 15.00</p>
+            <p class="small-text">10 biodegradable plates per pack</p>
+            <div class="quantity-wrap">
+              <button onclick="changeQty('qty5', -1)">−</button>
+              <span id="qty5">1</span>
+              <button onclick="changeQty('qty5', 1)">+</button>
+            </div>
+            <button class="btn btn-primary" onclick="addFromQty('Areca Leaf Plates', 15, 'qty5', 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80')">Add to Cart</button>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80" alt="Cotton tote bag" />
+          <div class="product-info">
+            <h3>Cotton Tote Bag</h3>
+            <p class="price">RM 18.00</p>
+            <p class="small-text">Reusable cotton bag for daily shopping</p>
+            <div class="quantity-wrap">
+              <button onclick="changeQty('qty6', -1)">−</button>
+              <span id="qty6">1</span>
+              <button onclick="changeQty('qty6', 1)">+</button>
+            </div>
+            <button class="btn btn-primary" onclick="addFromQty('Cotton Tote Bag', 18, 'qty6', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80')">Add to Cart</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Ecolovea</h3>
+        <p>Affordable eco-friendly essentials for greener everyday living.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="cart.html">Cart</a>
+        <a href="about.html">About</a>
+      </div>
+      <div>
+        <h4>Notice</h4>
+        <p>This website is for educational purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
