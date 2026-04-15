@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecolovea | Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-disclaimer">
+    This website is for educational purposes only.
+  </div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">Ecolovea</a>
+
+      <nav class="nav" id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart <span id="cartCount" class="cart-count">0</span></a>
+        <a href="about.html">About</a>
+        <a href="login.html" class="active">Login</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container auth-wrap">
+      <div class="auth-card">
+        <h1>Login</h1>
+        <p>Preview a simple account access page for the e-commerce website.</p>
+
+        <form onsubmit="handleLogin(event)">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter username" required />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter password" required />
+
+          <button type="submit" class="btn btn-primary full-width">Login</button>
+        </form>
+
+        <p id="loginMessage" class="small-note"></p>
+        <p class="small-note">Demo login: username <strong>ecolovea</strong>, password <strong>1234</strong></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Ecolovea</h3>
+        <p>Affordable eco-friendly essentials for greener everyday living.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+      </div>
+      <div>
+        <h4>Notice</h4>
+        <p>This website is for educational purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
