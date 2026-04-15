@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecolovea | Eco-Friendly Living Starts Here</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-disclaimer">
+    This website is for educational purposes only.
+  </div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">Ecolovea</a>
+
+      <nav class="nav" id="navMenu">
+        <a href="index.html" class="active">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart <span id="cartCount" class="cart-count">0</span></a>
+        <a href="about.html">About</a>
+        <a href="login.html">Login</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow">Eco-friendly e-commerce brand</p>
+          <h1>Small daily choices can create a greener future.</h1>
+          <p>
+            Ecolovea offers affordable eco-friendly dining and lifestyle essentials
+            for students, working adults, and small food businesses that want to reduce
+            single-use plastic waste.
+          </p>
+          <div class="hero-buttons">
+            <a href="products.html" class="btn btn-primary">Shop Products</a>
+            <a href="about.html" class="btn btn-secondary">Why Ecolovea?</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img
+            src="https://images.unsplash.com/photo-1523293915678-d126868e96f1?auto=format&fit=crop&w=900&q=80"
+            alt="Eco-friendly kitchen and lifestyle products"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Why eco-friendly matters</h2>
+          <p>
+            Our website design reflects the values discussed in the report: sustainability,
+            usability, transparency, and responsible business practice.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">♻️</div>
+            <h3>Reduces plastic waste</h3>
+            <p>
+              Our product range replaces common single-use items with reusable or biodegradable alternatives.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🌱</div>
+            <h3>Supports sustainable living</h3>
+            <p>
+              Ecolovea promotes practical everyday changes that are easy for students and families to adopt.
+            </p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Ethical and user-focused</h3>
+            <p>
+              Clear product details, privacy-conscious design, and a safe checkout flow are built into the site.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt-bg">
+      <div class="container">
+        <div class="section-title">
+          <h2>Featured products</h2>
+          <p>Affordable, practical, and suitable for daily use.</p>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card">
+            <img
+              src="https://images.unsplash.com/photo-1584346133934-a3afd2a33c4a?auto=format&fit=crop&w=800&q=80"
+              alt="Bamboo cutlery set"
+            />
+            <div class="product-info">
+              <h3>Bamboo Cutlery Set</h3>
+              <p class="price">RM 12.00</p>
+              <p class="small-text">3-piece reusable set</p>
+              <button class="btn btn-primary" onclick="quickAdd('Bamboo Cutlery Set', 12, 'https://images.unsplash.com/photo-1584346133934-a3afd2a33c4a?auto=format&fit=crop&w=800&q=80')">
+                Add to Cart
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <img
+              src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80"
+              alt="Stainless steel straw set"
+            />
+            <div class="product-info">
+              <h3>Stainless Steel Straw Set</h3>
+              <p class="price">RM 10.00</p>
+              <p class="small-text">2 straws + 1 cleaning brush</p>
+              <button class="btn btn-primary" onclick="quickAdd('Stainless Steel Straw Set', 10, 'https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80')">
+                Add to Cart
+              </button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <img
+              src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80"
+              alt="Glass water bottle"
+            />
+            <div class="product-info">
+              <h3>Glass Water Bottle</h3>
+              <p class="price">RM 20.00</p>
+              <p class="small-text">Reusable BPA-free bottle</p>
+              <button class="btn btn-primary" onclick="quickAdd('Glass Water Bottle', 20, 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80')">
+                Add to Cart
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div class="center-spaced">
+          <a href="products.html" class="btn btn-secondary">View All Products</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container two-col">
+        <div class="info-box">
+          <h2>Marketing and trust strategy</h2>
+          <p>
+            The website uses a clean green brand identity, clear product messaging,
+            and a simple navigation flow to support customer trust and encourage conversion.
+          </p>
+          <ul class="clean-list">
+            <li>SEO-friendly page structure and descriptive headings</li>
+            <li>Clear call-to-action buttons and product display</li>
+            <li>Transparent eco benefits and practical product descriptions</li>
+          </ul>
+        </div>
+
+        <div class="info-box">
+          <h2>Legal and ethical considerations</h2>
+          <p>
+            Ecolovea reflects the report’s ethical and legal focus through transparency,
+            data-conscious design, and prominent disclaimers.
+          </p>
+          <ul class="clean-list">
+            <li>Educational-purpose disclaimer displayed on every page</li>
+            <li>Fake payment flow clearly disabled</li>
+            <li>Privacy and responsible sourcing information included</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Ecolovea</h3>
+        <p>Affordable eco-friendly essentials for greener everyday living.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+        <a href="about.html">About</a>
+      </div>
+      <div>
+        <h4>Notice</h4>
+        <p>This website is for educational purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
