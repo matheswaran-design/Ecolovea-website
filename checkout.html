@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecolovea | Checkout</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-disclaimer">
+    This website is for educational purposes only.
+  </div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">Ecolovea</a>
+
+      <nav class="nav" id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart <span id="cartCount" class="cart-count">0</span></a>
+        <a href="about.html">About</a>
+        <a href="login.html">Login</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container checkout-layout">
+      <section class="checkout-form-panel">
+        <div class="section-title left-align">
+          <h1>Checkout</h1>
+          <p>Complete the form below to preview the checkout experience.</p>
+        </div>
+
+        <form class="checkout-form" onsubmit="handleFakeCheckout(event)">
+          <div class="form-grid">
+            <div>
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" placeholder="Enter your full name" required />
+            </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="Enter your email" required />
+            </div>
+
+            <div>
+              <label for="phone">Phone Number</label>
+              <input type="text" id="phone" placeholder="Enter your phone number" required />
+            </div>
+
+            <div>
+              <label for="country">Country</label>
+              <select id="country" required>
+                <option value="">Select country</option>
+                <option>Malaysia</option>
+                <option>Singapore</option>
+                <option>Indonesia</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="address">Address</label>
+          <textarea id="address" rows="4" placeholder="Enter your delivery address" required></textarea>
+
+          <h2 class="payment-title">Payment Information</h2>
+
+          <div class="fake-payment-box">
+            <div class="payment-methods">
+              <label><input type="radio" name="payment" checked /> Credit / Debit Card</label>
+              <label><input type="radio" name="payment" /> Online Banking</label>
+              <label><input type="radio" name="payment" /> E-Wallet</label>
+            </div>
+
+            <div class="form-grid">
+              <div>
+                <label for="cardName">Name on Card</label>
+                <input type="text" id="cardName" placeholder="Cardholder name" />
+              </div>
+
+              <div>
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" />
+              </div>
+
+              <div>
+                <label for="expiry">Expiry Date</label>
+                <input type="text" id="expiry" placeholder="MM/YY" />
+              </div>
+
+              <div>
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="123" />
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary full-width">Complete Checkout</button>
+        </form>
+      </section>
+
+      <aside class="summary-panel">
+        <h2>Checkout Summary</h2>
+        <div id="checkoutItems" class="mini-cart-list"></div>
+
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="checkoutSubtotal">RM 0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery</span>
+          <span>RM 5.00</span>
+        </div>
+        <div class="summary-row total-row">
+          <span>Total</span>
+          <span id="checkoutTotal">RM 0.00</span>
+        </div>
+
+        <p class="small-note">
+          This payment section is a demonstration only. No actual payment will be made.
+        </p>
+      </aside>
+    </div>
+  </main>
+
+  <div class="modal hidden" id="checkoutModal">
+    <div class="modal-content">
+      <h2>Educational Purpose Notice</h2>
+      <p>This website is for educational purposes only.</p>
+      <button class="btn btn-primary" onclick="closeModal()">OK</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>Ecolovea</h3>
+        <p>Affordable eco-friendly essentials for greener everyday living.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+        <a href="about.html">About</a>
+      </div>
+      <div>
+        <h4>Notice</h4>
+        <p>This website is for educational purposes only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
