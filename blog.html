@@ -21,10 +21,10 @@
         <a href="cart.html">Cart <span id="cartCount" class="cart-count">0</span></a>
         <a href="about.html">About</a>
         <a href="blog.html" class="active">Blog</a>
-        <a href="login.html">Login</a>
       </nav>
 
       <div class="nav-actions">
+        <a href="login.html" class="account-link" aria-label="User account">👤</a>
         <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
         <button class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button>
       </div>
@@ -36,64 +36,59 @@
       <div class="section-title">
         <h1>Environmental Awareness Blog</h1>
         <p>
-          Learn more about sustainable living, waste reduction, and why eco-friendly choices matter.
+          Read our recommended environmental awareness articles and unlock vouchers.
         </p>
+      </div>
+
+      <div class="voucher-banner">
+        <h2>Your Voucher Progress</h2>
+        <p>You have unlocked <strong><span id="voucherCount">0</span></strong> out of 5 vouchers.</p>
       </div>
 
       <div class="about-grid">
         <article class="info-box">
-          <h2>Why reducing plastic waste is important</h2>
-          <p>
-            Plastic waste is one of the biggest environmental challenges in modern society.
-            Many single-use plastic products are used for only a few minutes but remain in the
-            environment for many years. Replacing them with reusable alternatives can reduce
-            long-term pollution and support cleaner communities.
-          </p>
+          <h2>Article 1</h2>
+          <p>Plastic pollution and its long-term impact on the environment.</p>
+          <a class="btn btn-primary" href="https://www.unep.org/plastic-pollution" target="_blank" rel="noopener" onclick="unlockVoucher(1)">
+            Read Article & Unlock Voucher
+          </a>
+          <p id="voucher1" class="voucher-status">Voucher 1: Locked</p>
         </article>
 
         <article class="info-box">
-          <h2>How reusable products help the environment</h2>
-          <p>
-            Reusable items such as bamboo cutlery, glass containers, and tote bags reduce the
-            need for constant replacement and disposal. This lowers waste generation and encourages
-            more mindful consumption in daily life.
-          </p>
+          <h2>Article 2</h2>
+          <p>Why reusable daily products matter in sustainable living.</p>
+          <a class="btn btn-primary" href="https://www.worldwildlife.org/threats/plastic-pollution" target="_blank" rel="noopener" onclick="unlockVoucher(2)">
+            Read Article & Unlock Voucher
+          </a>
+          <p id="voucher2" class="voucher-status">Voucher 2: Locked</p>
         </article>
 
         <article class="info-box">
-          <h2>Small lifestyle changes with big impact</h2>
-          <p>
-            Environmental sustainability does not always require large changes. Simple actions like
-            carrying a reusable bottle, using metal straws, or bringing a tote bag while shopping can
-            create meaningful positive impact over time.
-          </p>
+          <h2>Article 3</h2>
+          <p>How small daily habits can help reduce environmental waste.</p>
+          <a class="btn btn-primary" href="https://www.nationalgeographic.com/environment/article/plastic-pollution" target="_blank" rel="noopener" onclick="unlockVoucher(3)">
+            Read Article & Unlock Voucher
+          </a>
+          <p id="voucher3" class="voucher-status">Voucher 3: Locked</p>
         </article>
 
         <article class="info-box">
-          <h2>Why eco-friendly products matter to students and working adults</h2>
-          <p>
-            Students and young working adults are increasingly aware of environmental issues and
-            often seek affordable ways to live more responsibly. Eco-friendly daily-use products are
-            attractive because they are practical, stylish, and cost-saving in the long term.
-          </p>
+          <h2>Article 4</h2>
+          <p>The role of sustainable consumption in modern lifestyles.</p>
+          <a class="btn btn-primary" href="https://www.un.org/sustainabledevelopment/sustainable-consumption-production/" target="_blank" rel="noopener" onclick="unlockVoucher(4)">
+            Read Article & Unlock Voucher
+          </a>
+          <p id="voucher4" class="voucher-status">Voucher 4: Locked</p>
         </article>
 
         <article class="info-box">
-          <h2>Sustainable choices for small businesses</h2>
-          <p>
-            Restaurants, cafés, and small food businesses can improve their brand image by adopting
-            eco-friendly serving and packaging solutions. This not only reduces waste but also appeals
-            to customers who value sustainability.
-          </p>
-        </article>
-
-        <article class="info-box">
-          <h2>Building a greener future together</h2>
-          <p>
-            Environmental responsibility is shared by individuals, businesses, and communities.
-            Through education, awareness, and simple product choices, brands like Ecolovea can
-            encourage more people to take part in building a greener future.
-          </p>
+          <h2>Article 5</h2>
+          <p>How businesses can contribute to a greener future.</p>
+          <a class="btn btn-primary" href="https://www.weforum.org/agenda/2022/02/plastic-waste-pollution/" target="_blank" rel="noopener" onclick="unlockVoucher(5)">
+            Read Article & Unlock Voucher
+          </a>
+          <p id="voucher5" class="voucher-status">Voucher 5: Locked</p>
         </article>
       </div>
     </div>
@@ -113,11 +108,17 @@
         <a href="cart.html">Cart</a>
       </div>
       <div>
-        <h4>Notice</h4>
-        <p>This website is for educational purposes only.</p>
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram">📷 Instagram</a>
+          <a href="#" aria-label="Facebook">📘 Facebook</a>
+          <a href="#" aria-label="TikTok">🎵 TikTok</a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <div class="toast" id="toast"></div>
 
   <script src="script.js"></script>
 </body>
