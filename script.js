@@ -183,32 +183,86 @@ function renderCheckoutSummary() {
 function handleFakeCheckout(event) {
   event.preventDefault();
   const modal = document.getElementById("checkoutModal");
-  if (modal) {
-    modal.classList.remove("hidden");
-  }
+  if (modal) modal.classList.remove("hidden");
 }
 
 function closeModal() {
   const modal = document.getElementById("checkoutModal");
-  if (modal) {
-    modal.classList.add("hidden");
+  if (modal) modal.classList.add("hidden");
+}
+
+function handleSignup(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("signupEmail")?.value.trim();
+  const username = document.getElementById("signupUsername")?.value.trim();
+  const password = document.getElementById("signupPassword")?.value.trim();
+  const message = document.getElementById("signupMessage");
+
+  if (!message) return;
+
+  if (!email || !username || !password) {
+    message.textContent = "Please fill in all sign-up fields.";
+    message.style.color = "crimson";
+    return;
   }
+
+  const user = { email, username, password };
+  localStorage.setItem("ecoloveaUser", JSON.stringify(user));
+  message.textContent = "Account created successfully.";
+  message.style.color = "green";
 }
 
 function handleLogin(event) {
   event.preventDefault();
-  const username = document.getElementById("username")?.value.trim();
-  const password = document.getElementById("password")?.value.trim();
+
+  const username = document.getElementById("loginUsername")?.value.trim();
+  const password = document.getElementById("loginPassword")?.value.trim();
   const message = document.getElementById("loginMessage");
+  const savedUser = JSON.parse(localStorage.getItem("ecoloveaUser"));
 
   if (!message) return;
 
-  if (username === "ecolovea" && password === "1234") {
-    message.textContent = "Login successful. Demo account verified.";
+  if (savedUser && username === savedUser.username && password === savedUser.password) {
+    message.textContent = "Login successful.";
     message.style.color = "green";
   } else {
-    message.textContent = "Invalid login details. Please use the demo credentials shown below.";
+    message.textContent = "Invalid username or password.";
     message.style.color = "crimson";
+  }
+}
+
+function unlockVoucher(articleNumber) {
+  let vouchers = JSON.parse(localStorage.getItem("ecoloveaVouchers")) || [];
+
+  if (!vouchers.includes(articleNumber)) {
+    vouchers.push(articleNumber);
+    localStorage.setItem("ecoloveaVouchers", JSON.stringify(vouchers));
+    showToast(`Voucher ${articleNumber} unlocked`);
+  }
+
+  renderVouchers();
+}
+
+function renderVouchers() {
+  const vouchers = JSON.parse(localStorage.getItem("ecoloveaVouchers")) || [];
+  const countEl = document.getElementById("voucherCount");
+
+  if (countEl) {
+    countEl.textContent = vouchers.length;
+  }
+
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById(`voucher${i}`);
+    if (el) {
+      if (vouchers.includes(i)) {
+        el.textContent = `Voucher ${i}: Unlocked`;
+        el.style.color = "green";
+      } else {
+        el.textContent = `Voucher ${i}: Locked`;
+        el.style.color = "";
+      }
+    }
   }
 }
 
@@ -257,6 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   renderCart();
   renderCheckoutSummary();
+  renderVouchers();
   initTheme();
   initMenu();
 });
