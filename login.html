@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ecolovea | Login</title>
+  <title>Ecolovea | Account</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -21,10 +21,10 @@
         <a href="cart.html">Cart <span id="cartCount" class="cart-count">0</span></a>
         <a href="about.html">About</a>
         <a href="blog.html">Blog</a>
-        <a href="login.html" class="active">Login</a>
       </nav>
 
       <div class="nav-actions">
+        <a href="login.html" class="account-link active" aria-label="User account">👤</a>
         <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
         <button class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button>
       </div>
@@ -32,23 +32,42 @@
   </header>
 
   <main class="section">
-    <div class="container auth-wrap">
+    <div class="container auth-split">
+      <div class="auth-card">
+        <h1>Sign Up</h1>
+        <p>Create a new account to continue.</p>
+
+        <form onsubmit="handleSignup(event)">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" placeholder="Enter email" required />
+
+          <label for="signupUsername">Username</label>
+          <input type="text" id="signupUsername" placeholder="Choose username" required />
+
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" placeholder="Create password" required />
+
+          <button type="submit" class="btn btn-primary full-width">Sign Up</button>
+        </form>
+
+        <p id="signupMessage" class="small-note"></p>
+      </div>
+
       <div class="auth-card">
         <h1>Login</h1>
-        <p>Preview a simple account access page for the e-commerce website.</p>
+        <p>Login with your username and password.</p>
 
         <form onsubmit="handleLogin(event)">
-          <label for="username">Username</label>
-          <input type="text" id="username" placeholder="Enter username" required />
+          <label for="loginUsername">Username</label>
+          <input type="text" id="loginUsername" placeholder="Enter username" required />
 
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter password" required />
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter password" required />
 
           <button type="submit" class="btn btn-primary full-width">Login</button>
         </form>
 
         <p id="loginMessage" class="small-note"></p>
-        <p class="small-note">Demo login: username <strong>ecolovea</strong>, password <strong>1234</strong></p>
       </div>
     </div>
   </main>
@@ -67,8 +86,12 @@
         <a href="blog.html">Blog</a>
       </div>
       <div>
-        <h4>Notice</h4>
-        <p>This website is for educational purposes only.</p>
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Instagram">📷 Instagram</a>
+          <a href="#" aria-label="Facebook">📘 Facebook</a>
+          <a href="#" aria-label="TikTok">🎵 TikTok</a>
+        </div>
       </div>
     </div>
   </footer>
