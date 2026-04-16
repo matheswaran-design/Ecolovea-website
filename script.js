@@ -79,9 +79,9 @@ function renderCart() {
 
   if (cart.length === 0) {
     emptyCartEl?.classList.remove("hidden");
-    subtotalEl && (subtotalEl.textContent = "RM 0.00");
-    totalPriceEl && (totalPriceEl.textContent = "RM 0.00");
-    deliveryEl && (deliveryEl.textContent = "RM 5.00");
+    if (subtotalEl) subtotalEl.textContent = "RM 0.00";
+    if (totalPriceEl) totalPriceEl.textContent = "RM 0.00";
+    if (deliveryEl) deliveryEl.textContent = "RM 5.00";
     return;
   }
 
@@ -183,12 +183,16 @@ function renderCheckoutSummary() {
 function handleFakeCheckout(event) {
   event.preventDefault();
   const modal = document.getElementById("checkoutModal");
-  if (modal) modal.classList.remove("hidden");
+  if (modal) {
+    modal.classList.remove("hidden");
+  }
 }
 
 function closeModal() {
   const modal = document.getElementById("checkoutModal");
-  if (modal) modal.classList.add("hidden");
+  if (modal) {
+    modal.classList.add("hidden");
+  }
 }
 
 function handleLogin(event) {
@@ -235,6 +239,19 @@ function initMenu() {
     });
   }
 }
+
+window.addEventListener("click", function (e) {
+  const modal = document.getElementById("checkoutModal");
+  if (modal && !modal.classList.contains("hidden") && e.target === modal) {
+    closeModal();
+  }
+});
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
