@@ -180,6 +180,21 @@ function renderCheckoutSummary() {
   totalEl.textContent = `RM ${(subtotal + DELIVERY_FEE).toFixed(2)}`;
 }
 
+function openCartCheckoutNotice() {
+  const modal = document.getElementById("cartCheckoutModal");
+  if (modal) {
+    modal.classList.remove("hidden");
+  }
+}
+
+function goToCheckoutFromCart() {
+  const modal = document.getElementById("cartCheckoutModal");
+  if (modal) {
+    modal.classList.add("hidden");
+  }
+  window.location.href = "checkout.html";
+}
+
 function handleFakeCheckout(event) {
   event.preventDefault();
   const modal = document.getElementById("checkoutModal");
@@ -295,15 +310,23 @@ function initMenu() {
 }
 
 window.addEventListener("click", function (e) {
-  const modal = document.getElementById("checkoutModal");
-  if (modal && !modal.classList.contains("hidden") && e.target === modal) {
+  const checkoutModal = document.getElementById("checkoutModal");
+  const cartModal = document.getElementById("cartCheckoutModal");
+
+  if (checkoutModal && !checkoutModal.classList.contains("hidden") && e.target === checkoutModal) {
     closeModal();
+  }
+
+  if (cartModal && !cartModal.classList.contains("hidden") && e.target === cartModal) {
+    cartModal.classList.add("hidden");
   }
 });
 
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     closeModal();
+    const cartModal = document.getElementById("cartCheckoutModal");
+    if (cartModal) cartModal.classList.add("hidden");
   }
 });
 
