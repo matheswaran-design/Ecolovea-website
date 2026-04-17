@@ -1,413 +1,705 @@
-const DELIVERY_FEE = 5;
-
-function getCart() {
-  return JSON.parse(localStorage.getItem("ecoloveaCart")) || [];
+:root {
+  --bg: #f6fbf7;
+  --card: #ffffff;
+  --text: #1d2a22;
+  --muted: #5f6f66;
+  --primary: #2e7d32;
+  --primary-dark: #1f5f24;
+  --accent: #dcefdc;
+  --border: #d9e4da;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-function saveCart(cart) {
-  localStorage.setItem("ecoloveaCart", JSON.stringify(cart));
-  updateCartCount();
+body.dark {
+  --bg: #111714;
+  --card: #1a221d;
+  --text: #eef6f0;
+  --muted: #b7c7bc;
+  --primary: #66bb6a;
+  --primary-dark: #4a9d4f;
+  --accent: #203127;
+  --border: #2b3a31;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-function getAppliedVoucher() {
-  return JSON.parse(localStorage.getItem("ecoloveaAppliedVoucher")) || null;
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
 
-function setAppliedVoucher(voucher) {
-  localStorage.setItem("ecoloveaAppliedVoucher", JSON.stringify(voucher));
+img {
+  width: 100%;
+  display: block;
+  border-radius: 16px;
 }
 
-function clearAppliedVoucher() {
-  localStorage.removeItem("ecoloveaAppliedVoucher");
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  if (!toast) return;
-  toast.textContent = message;
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 2200);
+.container {
+  width: min(1120px, 92%);
+  margin: 0 auto;
 }
 
-function quickAdd(name, price, image) {
-  const cart = getCart();
-  const existing = cart.find(item => item.name === name);
+.top-disclaimer {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 0.92rem;
+}
 
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    cart.push({ name, price, image, quantity: 1 });
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+  position: relative;
+}
+
+.brand {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.nav a {
+  color: var(--muted);
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: var(--primary);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.account-link,
+.theme-btn,
+.menu-btn {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.menu-btn {
+  display: none;
+}
+
+.cart-count {
+  display: inline-flex;
+  min-width: 22px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  margin-left: 6px;
+  padding: 0 6px;
+}
+
+.hero {
+  padding: 64px 0;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 34px;
+  align-items: center;
+}
+
+.hero-text h1 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.15;
+  margin: 10px 0 16px;
+}
+
+.hero-text p {
+  color: var(--muted);
+  max-width: 620px;
+}
+
+.eyebrow {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--primary);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.hero-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+  animation: floatIn 0.8s ease;
+}
+
+.section {
+  padding: 56px 0;
+}
+
+.alt-bg {
+  background: linear-gradient(to bottom, transparent, rgba(46, 125, 50, 0.04));
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-title.left-align {
+  text-align: left;
+}
+
+.section-title h1,
+.section-title h2 {
+  margin-bottom: 10px;
+}
+
+.section-title p {
+  color: var(--muted);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.left-align p {
+  margin: 0;
+  max-width: 700px;
+}
+
+.feature-grid,
+.about-grid,
+.product-grid,
+.footer-grid,
+.two-col {
+  display: grid;
+  gap: 22px;
+}
+
+.feature-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.feature-card,
+.info-box,
+.product-card,
+.auth-card,
+.summary-panel,
+.cart-panel,
+.checkout-form-panel,
+.voucher-banner {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.feature-card,
+.info-box,
+.voucher-banner {
+  padding: 24px;
+}
+
+.voucher-banner {
+  text-align: center;
+  margin-bottom: 24px;
+  background: var(--accent);
+}
+
+.voucher-box {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.voucher-apply-box {
+  margin-bottom: 18px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--accent);
+}
+
+.voucher-apply-box input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 10px 0 12px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.feature-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: var(--accent);
+  font-size: 1.5rem;
+  margin-bottom: 14px;
+}
+
+.product-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.product-page-grid .product-card {
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-page-grid .product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-page-grid .product-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px 16px 0 0;
+  background: #f2f2f2;
+}
+
+.product-info {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-info h3 {
+  margin: 0 0 8px;
+  min-height: 48px;
+}
+
+.price {
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.small-text,
+.small-note,
+.voucher-status {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.quantity-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 8px 14px;
+  margin: 14px 0;
+}
+
+.quantity-wrap button {
+  border: none;
+  background: var(--card);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+.btn-secondary:hover {
+  opacity: 0.9;
+}
+
+.product-info .btn {
+  margin-top: auto;
+}
+
+.full-width {
+  width: 100%;
+  text-align: center;
+}
+
+.center-spaced {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.clean-list {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.clean-list li {
+  margin-bottom: 8px;
+}
+
+.cart-layout,
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 24px;
+}
+
+.cart-panel,
+.summary-panel,
+.checkout-form-panel {
+  padding: 24px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 84px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-item img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 14px;
+}
+
+.cart-item h4 {
+  margin: 0 0 4px;
+}
+
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.cart-controls button {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.remove-btn {
+  color: #c62828;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0;
+}
+
+.total-row {
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 30px 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.checkout-form label,
+.auth-card label {
+  display: block;
+  font-weight: 700;
+  margin: 14px 0 8px;
+}
+
+.checkout-form input,
+.checkout-form textarea,
+.checkout-form select,
+.auth-card input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.payment-title {
+  margin-top: 26px;
+}
+
+.fake-payment-box {
+  background: var(--accent);
+  border-radius: 18px;
+  padding: 18px;
+  margin: 14px 0 22px;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.auth-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.auth-card {
+  width: 100%;
+  padding: 28px;
+}
+
+.site-footer {
+  margin-top: 30px;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  grid-template-columns: 1.2fr 1fr 1fr;
+  padding: 30px 0;
+}
+
+.footer-grid a {
+  display: block;
+  color: var(--muted);
+  margin: 6px 0;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  margin: 8px 0;
+  transition: 0.25s ease;
+}
+
+.social-icons a:hover {
+  color: var(--primary);
+}
+
+.social-icons i {
+  font-size: 1.1rem;
+}
+
+.toast {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  background: #111;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: var(--card);
+  color: var(--text);
+  border-radius: 22px;
+  padding: 28px;
+  width: min(460px, 100%);
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-grid,
+  .cart-layout,
+  .checkout-layout,
+  .feature-grid,
+  .product-grid,
+  .footer-grid,
+  .two-col,
+  .about-grid,
+  .auth-split {
+    grid-template-columns: 1fr;
   }
 
-  saveCart(cart);
-  showToast(`${name} added to cart`);
-}
-
-function changeQty(id, change) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  let qty = parseInt(el.textContent, 10);
-  qty += change;
-  if (qty < 1) qty = 1;
-  el.textContent = qty;
-}
-
-function addFromQty(name, price, qtyId, image) {
-  const qty = parseInt(document.getElementById(qtyId).textContent, 10);
-  const cart = getCart();
-  const existing = cart.find(item => item.name === name);
-
-  if (existing) {
-    existing.quantity += qty;
-  } else {
-    cart.push({ name, price, image, quantity: qty });
+  .form-grid {
+    grid-template-columns: 1fr;
   }
 
-  saveCart(cart);
-  showToast(`${qty} × ${name} added to cart`);
-}
+  .nav {
+    position: absolute;
+    top: 74px;
+    right: 4%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    border-radius: 18px;
+    padding: 14px;
+    display: none;
+    flex-direction: column;
+    min-width: 220px;
+  }
 
-function updateCartCount() {
-  const countEls = document.querySelectorAll("#cartCount");
-  const cart = getCart();
-  const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+  .nav.show {
+    display: flex;
+  }
 
-  countEls.forEach(el => {
-    el.textContent = totalQty;
-  });
-}
-
-function calculateDiscount(subtotal) {
-  const voucher = getAppliedVoucher();
-  if (!voucher) return 0;
-  return subtotal * (voucher.discount / 100);
-}
-
-function applyVoucher() {
-  const input = document.getElementById("voucherCode");
-  const message = document.getElementById("voucherMessage");
-  if (!input || !message) return;
-
-  const code = input.value.trim().toUpperCase();
-  const unlocked = JSON.parse(localStorage.getItem("ecoloveaVouchers")) || [];
-
-  const validVoucherMap = {
-    "ECO5A1": 1,
-    "ECO5A2": 2,
-    "ECO5A3": 3,
-    "ECO5A4": 4,
-    "ECO5A5": 5
-  };
-
-  if (validVoucherMap[code] && unlocked.includes(validVoucherMap[code])) {
-    setAppliedVoucher({ code, discount: 5 });
-    message.textContent = `${code} applied successfully. 5% discount added.`;
-    message.style.color = "green";
-    renderCart();
-    renderCheckoutSummary();
-    showToast("Voucher applied");
-  } else {
-    message.textContent = "Invalid or locked voucher code.";
-    message.style.color = "crimson";
+  .menu-btn {
+    display: inline-block;
   }
 }
 
-function renderCart() {
-  const cartItemsEl = document.getElementById("cartItems");
-  const emptyCartEl = document.getElementById("emptyCart");
-  const subtotalEl = document.getElementById("subtotal");
-  const totalPriceEl = document.getElementById("totalPrice");
-  const deliveryEl = document.getElementById("deliveryFee");
-  const discountEl = document.getElementById("discountAmount");
-
-  if (!cartItemsEl) return;
-
-  const cart = getCart();
-  cartItemsEl.innerHTML = "";
-
-  if (cart.length === 0) {
-    emptyCartEl?.classList.remove("hidden");
-    if (subtotalEl) subtotalEl.textContent = "RM 0.00";
-    if (discountEl) discountEl.textContent = "RM 0.00";
-    if (totalPriceEl) totalPriceEl.textContent = "RM 0.00";
-    if (deliveryEl) deliveryEl.textContent = "RM 5.00";
-    return;
+@media (max-width: 600px) {
+  .hero {
+    padding: 42px 0;
   }
 
-  emptyCartEl?.classList.add("hidden");
-
-  let subtotal = 0;
-
-  cart.forEach((item, index) => {
-    subtotal += item.price * item.quantity;
-
-    const itemEl = document.createElement("div");
-    itemEl.className = "cart-item";
-    itemEl.innerHTML = `
-      <img src="${item.image}" alt="${item.name}">
-      <div>
-        <h4>${item.name}</h4>
-        <p class="small-text">RM ${item.price.toFixed(2)} each</p>
-        <div class="cart-controls">
-          <button onclick="updateItemQuantity(${index}, -1)">−</button>
-          <span>${item.quantity}</span>
-          <button onclick="updateItemQuantity(${index}, 1)">+</button>
-          <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
-        </div>
-      </div>
-      <strong>RM ${(item.price * item.quantity).toFixed(2)}</strong>
-    `;
-    cartItemsEl.appendChild(itemEl);
-  });
-
-  const discount = calculateDiscount(subtotal);
-  const total = subtotal - discount + DELIVERY_FEE;
-
-  if (subtotalEl) subtotalEl.textContent = `RM ${subtotal.toFixed(2)}`;
-  if (discountEl) discountEl.textContent = `- RM ${discount.toFixed(2)}`;
-  if (totalPriceEl) totalPriceEl.textContent = `RM ${total.toFixed(2)}`;
-}
-
-function updateItemQuantity(index, change) {
-  const cart = getCart();
-  if (!cart[index]) return;
-
-  cart[index].quantity += change;
-  if (cart[index].quantity <= 0) {
-    cart.splice(index, 1);
+  .hero-text h1 {
+    font-size: 2rem;
   }
 
-  saveCart(cart);
-  renderCart();
-  renderCheckoutSummary();
-}
-
-function removeItem(index) {
-  const cart = getCart();
-  cart.splice(index, 1);
-  saveCart(cart);
-  renderCart();
-  renderCheckoutSummary();
-  showToast("Item removed");
-}
-
-function clearCart() {
-  localStorage.removeItem("ecoloveaCart");
-  clearAppliedVoucher();
-  updateCartCount();
-  renderCart();
-  renderCheckoutSummary();
-  showToast("Cart cleared");
-}
-
-function renderCheckoutSummary() {
-  const itemsEl = document.getElementById("checkoutItems");
-  const subtotalEl = document.getElementById("checkoutSubtotal");
-  const totalEl = document.getElementById("checkoutTotal");
-  const discountEl = document.getElementById("checkoutDiscount");
-  if (!itemsEl) return;
-
-  const cart = getCart();
-  itemsEl.innerHTML = "";
-
-  let subtotal = 0;
-
-  if (cart.length === 0) {
-    itemsEl.innerHTML = `<p class="small-text">No items in cart.</p>`;
-    subtotalEl.textContent = "RM 0.00";
-    if (discountEl) discountEl.textContent = "RM 0.00";
-    totalEl.textContent = "RM 5.00";
-    return;
+  .product-page-grid .product-card img {
+    height: 220px;
   }
 
-  cart.forEach(item => {
-    subtotal += item.price * item.quantity;
-    const row = document.createElement("div");
-    row.className = "summary-row";
-    row.innerHTML = `
-      <span>${item.name} × ${item.quantity}</span>
-      <span>RM ${(item.price * item.quantity).toFixed(2)}</span>
-    `;
-    itemsEl.appendChild(row);
-  });
+  .product-info,
+  .cart-panel,
+  .summary-panel,
+  .checkout-form-panel,
+  .auth-card,
+  .feature-card,
+  .info-box,
+  .voucher-banner {
+    padding: 18px;
+  }
 
-  const discount = calculateDiscount(subtotal);
-  const total = subtotal - discount + DELIVERY_FEE;
+  .cart-item {
+    grid-template-columns: 1fr;
+  }
 
-  subtotalEl.textContent = `RM ${subtotal.toFixed(2)}`;
-  if (discountEl) discountEl.textContent = `- RM ${discount.toFixed(2)}`;
-  totalEl.textContent = `RM ${total.toFixed(2)}`;
-}
-
-function openCartCheckoutNotice() {
-  const modal = document.getElementById("cartCheckoutModal");
-  if (modal) {
-    modal.classList.remove("hidden");
+  .cart-item img {
+    width: 100%;
+    height: 180px;
   }
 }
-
-function goToCheckoutFromCart() {
-  const modal = document.getElementById("cartCheckoutModal");
-  if (modal) {
-    modal.classList.add("hidden");
-  }
-  window.location.href = "checkout.html";
-}
-
-function handleFakeCheckout(event) {
-  event.preventDefault();
-  const modal = document.getElementById("checkoutModal");
-  if (modal) modal.classList.remove("hidden");
-}
-
-function closeModal() {
-  const modal = document.getElementById("checkoutModal");
-  if (modal) modal.classList.add("hidden");
-}
-
-function handleSignup(event) {
-  event.preventDefault();
-
-  const email = document.getElementById("signupEmail")?.value.trim();
-  const username = document.getElementById("signupUsername")?.value.trim();
-  const password = document.getElementById("signupPassword")?.value.trim();
-  const message = document.getElementById("signupMessage");
-
-  if (!message) return;
-
-  if (!email || !username || !password) {
-    message.textContent = "Please fill in all sign-up fields.";
-    message.style.color = "crimson";
-    return;
-  }
-
-  const user = { email, username, password };
-  localStorage.setItem("ecoloveaUser", JSON.stringify(user));
-  message.textContent = "Account created successfully.";
-  message.style.color = "green";
-}
-
-function handleLogin(event) {
-  event.preventDefault();
-
-  const username = document.getElementById("loginUsername")?.value.trim();
-  const password = document.getElementById("loginPassword")?.value.trim();
-  const message = document.getElementById("loginMessage");
-  const savedUser = JSON.parse(localStorage.getItem("ecoloveaUser"));
-
-  if (!message) return;
-
-  if (savedUser && username === savedUser.username && password === savedUser.password) {
-    message.textContent = "Login successful.";
-    message.style.color = "green";
-  } else {
-    message.textContent = "Invalid username or password.";
-    message.style.color = "crimson";
-  }
-}
-
-function unlockVoucher(articleNumber) {
-  let vouchers = JSON.parse(localStorage.getItem("ecoloveaVouchers")) || [];
-
-  if (!vouchers.includes(articleNumber)) {
-    vouchers.push(articleNumber);
-    localStorage.setItem("ecoloveaVouchers", JSON.stringify(vouchers));
-    showToast(`Voucher ${articleNumber} unlocked`);
-  }
-
-  renderVouchers();
-}
-
-function renderVouchers() {
-  const vouchers = JSON.parse(localStorage.getItem("ecoloveaVouchers")) || [];
-  const countEl = document.getElementById("voucherCount");
-
-  if (countEl) {
-    countEl.textContent = vouchers.length;
-  }
-
-  const codeMap = {
-    1: "ECO5A1",
-    2: "ECO5A2",
-    3: "ECO5A3",
-    4: "ECO5A4",
-    5: "ECO5A5"
-  };
-
-  for (let i = 1; i <= 5; i++) {
-    const el = document.getElementById(`voucher${i}`);
-    const box = document.getElementById(`voucherBox${i}`);
-    if (el) {
-      if (vouchers.includes(i)) {
-        el.textContent = `Voucher ${i}: Unlocked`;
-        el.style.color = "green";
-        if (box) {
-          box.classList.remove("hidden");
-          box.innerHTML = `<strong>Voucher Code:</strong> ${codeMap[i]} <br><span class="small-note">Use this in cart page for 5% off.</span>`;
-        }
-      } else {
-        el.textContent = `Voucher ${i}: Locked`;
-        el.style.color = "";
-        if (box) box.classList.add("hidden");
-      }
-    }
-  }
-}
-
-function initTheme() {
-  const savedTheme = localStorage.getItem("ecoloveaTheme");
-  if (savedTheme === "dark") {
-    document.body.classList.add("dark");
-  }
-
-  const themeBtn = document.getElementById("themeToggle");
-  if (themeBtn) {
-    themeBtn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
-    themeBtn.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      const isDark = document.body.classList.contains("dark");
-      localStorage.setItem("ecoloveaTheme", isDark ? "dark" : "light");
-      themeBtn.textContent = isDark ? "☀️" : "🌙";
-    });
-  }
-}
-
-function initMenu() {
-  const menuBtn = document.getElementById("menuToggle");
-  const nav = document.getElementById("navMenu");
-  if (menuBtn && nav) {
-    menuBtn.addEventListener("click", () => {
-      nav.classList.toggle("show");
-    });
-  }
-}
-
-window.addEventListener("click", function (e) {
-  const checkoutModal = document.getElementById("checkoutModal");
-  const cartModal = document.getElementById("cartCheckoutModal");
-
-  if (checkoutModal && !checkoutModal.classList.contains("hidden") && e.target === checkoutModal) {
-    closeModal();
-  }
-
-  if (cartModal && !cartModal.classList.contains("hidden") && e.target === cartModal) {
-    cartModal.classList.add("hidden");
-  }
-});
-
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Escape") {
-    closeModal();
-    const cartModal = document.getElementById("cartCheckoutModal");
-    if (cartModal) cartModal.classList.add("hidden");
-  }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  updateCartCount();
-  renderCart();
-  renderCheckoutSummary();
-  renderVouchers();
-  initTheme();
-  initMenu();
-});
