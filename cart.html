@@ -55,14 +55,29 @@
 
       <aside class="summary-panel">
         <h2>Order Summary</h2>
+
+        <div class="voucher-apply-box">
+          <label for="voucherCode"><strong>Apply Voucher</strong></label>
+          <input type="text" id="voucherCode" placeholder="Enter voucher code" />
+          <button class="btn btn-secondary full-width" onclick="applyVoucher()">Apply Voucher</button>
+          <p id="voucherMessage" class="small-note"></p>
+        </div>
+
         <div class="summary-row">
           <span>Subtotal</span>
           <span id="subtotal">RM 0.00</span>
         </div>
+
+        <div class="summary-row">
+          <span>Discount</span>
+          <span id="discountAmount">RM 0.00</span>
+        </div>
+
         <div class="summary-row">
           <span>Delivery</span>
           <span id="deliveryFee">RM 5.00</span>
         </div>
+
         <div class="summary-row total-row">
           <span>Total</span>
           <span id="totalPrice">RM 0.00</span>
