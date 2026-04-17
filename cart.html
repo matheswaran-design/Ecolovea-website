@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ecolovea | Cart</title>
   <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
 </head>
 <body>
   <div class="top-disclaimer">
@@ -24,7 +28,9 @@
       </nav>
 
       <div class="nav-actions">
-        <a href="login.html" class="account-link" aria-label="User account">👤</a>
+        <a href="login.html" class="account-link" aria-label="User account">
+          <i class="fa-regular fa-user"></i>
+        </a>
         <button class="theme-btn" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
         <button class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button>
       </div>
@@ -62,7 +68,10 @@
           <span id="totalPrice">RM 0.00</span>
         </div>
 
-        <a href="checkout.html" class="btn btn-primary full-width">Proceed to Checkout</a>
+        <button class="btn btn-primary full-width" onclick="openCartCheckoutNotice()">
+          Proceed to Checkout
+        </button>
+
         <button class="btn btn-secondary full-width" onclick="clearCart()">Clear Cart</button>
 
         <p class="small-note">
@@ -71,6 +80,14 @@
       </aside>
     </div>
   </main>
+
+  <div class="modal hidden" id="cartCheckoutModal">
+    <div class="modal-content">
+      <h2>Educational Purpose Notice</h2>
+      <p>This website is only for educational purpose.</p>
+      <button class="btn btn-primary" onclick="goToCheckoutFromCart()">OK</button>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-grid">
@@ -88,9 +105,15 @@
       <div>
         <h4>Follow Us</h4>
         <div class="social-icons">
-          <a href="#" aria-label="Instagram">📷 Instagram</a>
-          <a href="#" aria-label="Facebook">📘 Facebook</a>
-          <a href="#" aria-label="TikTok">🎵 TikTok</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i> Instagram
+          </a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="fa-brands fa-facebook"></i> Facebook
+          </a>
+          <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+            <i class="fa-brands fa-tiktok"></i> TikTok
+          </a>
         </div>
       </div>
     </div>
