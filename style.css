@@ -486,11 +486,6 @@ a {
   margin-bottom: 16px;
 }
 
-.auth-wrap {
-  display: flex;
-  justify-content: center;
-}
-
 .auth-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -520,7 +515,20 @@ a {
 }
 
 .social-icons a {
-  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  margin: 8px 0;
+  transition: 0.25s ease;
+}
+
+.social-icons a:hover {
+  color: var(--primary);
+}
+
+.social-icons i {
+  font-size: 1.1rem;
 }
 
 .toast {
