@@ -128,7 +128,7 @@ function renderCart() {
   if (cart.length === 0) {
     emptyCartEl?.classList.remove("hidden");
     if (subtotalEl) subtotalEl.textContent = "RM 0.00";
-    if (discountEl) discountEl.textContent = "- RM 0.00";
+    if (discountEl) discountEl.textContent = "RM 0.00";
     if (totalPriceEl) totalPriceEl.textContent = "RM 0.00";
     if (deliveryEl) deliveryEl.textContent = "RM 5.00";
     return;
@@ -214,9 +214,9 @@ function renderCheckoutSummary() {
 
   if (cart.length === 0) {
     itemsEl.innerHTML = `<p class="small-text">No items in cart.</p>`;
-    if (subtotalEl) subtotalEl.textContent = "RM 0.00";
-    if (discountEl) discountEl.textContent = "- RM 0.00";
-    if (totalEl) totalEl.textContent = "RM 5.00";
+    subtotalEl.textContent = "RM 0.00";
+    if (discountEl) discountEl.textContent = "RM 0.00";
+    totalEl.textContent = "RM 5.00";
     return;
   }
 
@@ -234,9 +234,9 @@ function renderCheckoutSummary() {
   const discount = calculateDiscount(subtotal);
   const total = subtotal - discount + DELIVERY_FEE;
 
-  if (subtotalEl) subtotalEl.textContent = `RM ${subtotal.toFixed(2)}`;
+  subtotalEl.textContent = `RM ${subtotal.toFixed(2)}`;
   if (discountEl) discountEl.textContent = `- RM ${discount.toFixed(2)}`;
-  if (totalEl) totalEl.textContent = `RM ${total.toFixed(2)}`;
+  totalEl.textContent = `RM ${total.toFixed(2)}`;
 }
 
 function openCartCheckoutNotice() {
@@ -306,24 +306,7 @@ function handleLogin(event) {
   }
 }
 
-function markArticleOpened(articleNumber) {
-  let opened = JSON.parse(localStorage.getItem("ecoloveaOpenedArticles")) || [];
-  if (!opened.includes(articleNumber)) {
-    opened.push(articleNumber);
-    localStorage.setItem("ecoloveaOpenedArticles", JSON.stringify(opened));
-  }
-  setTimeout(() => {
-    renderVoucherUnlockButtons();
-  }, 300);
-}
-
-function unlockVoucherAfterView(articleNumber) {
-  let opened = JSON.parse(localStorage.getItem("ecoloveaOpenedArticles")) || [];
-  if (!opened.includes(articleNumber)) {
-    showToast("Please view the article first");
-    return;
-  }
-
+function unlockVoucher(articleNumber) {
   let vouchers = JSON.parse(localStorage.getItem("ecoloveaVouchers")) || [];
 
   if (!vouchers.includes(articleNumber)) {
@@ -333,23 +316,6 @@ function unlockVoucherAfterView(articleNumber) {
   }
 
   renderVouchers();
-  renderVoucherUnlockButtons();
-}
-
-function renderVoucherUnlockButtons() {
-  const opened = JSON.parse(localStorage.getItem("ecoloveaOpenedArticles")) || [];
-  const vouchers = JSON.parse(localStorage.getItem("ecoloveaVouchers")) || [];
-
-  for (let i = 1; i <= 5; i++) {
-    const btn = document.getElementById(`unlockBtn${i}`);
-    if (!btn) continue;
-
-    if (opened.includes(i) && !vouchers.includes(i)) {
-      btn.classList.remove("hidden");
-    } else {
-      btn.classList.add("hidden");
-    }
-  }
 }
 
 function renderVouchers() {
@@ -442,7 +408,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCart();
   renderCheckoutSummary();
   renderVouchers();
-  renderVoucherUnlockButtons();
   initTheme();
   initMenu();
 });
