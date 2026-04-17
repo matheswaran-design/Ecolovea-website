@@ -9,6 +9,18 @@ function saveCart(cart) {
   updateCartCount();
 }
 
+function getAppliedVoucher() {
+  return JSON.parse(localStorage.getItem("ecoloveaAppliedVoucher")) || null;
+}
+
+function setAppliedVoucher(voucher) {
+  localStorage.setItem("ecoloveaAppliedVoucher", JSON.stringify(voucher));
+}
+
+function clearAppliedVoucher() {
+  localStorage.removeItem("ecoloveaAppliedVoucher");
+}
+
 function showToast(message) {
   const toast = document.getElementById("toast");
   if (!toast) return;
@@ -65,12 +77,48 @@ function updateCartCount() {
   });
 }
 
+function calculateDiscount(subtotal) {
+  const voucher = getAppliedVoucher();
+  if (!voucher) return 0;
+  return subtotal * (voucher.discount / 100);
+}
+
+function applyVoucher() {
+  const input = document.getElementById("voucherCode");
+  const message = document.getElementById("voucherMessage");
+  if (!input || !message) return;
+
+  const code = input.value.trim().toUpperCase();
+  const unlocked = JSON.parse(localStorage.getItem("ecoloveaVouchers")) || [];
+
+  const validVoucherMap = {
+    "ECO5A1": 1,
+    "ECO5A2": 2,
+    "ECO5A3": 3,
+    "ECO5A4": 4,
+    "ECO5A5": 5
+  };
+
+  if (validVoucherMap[code] && unlocked.includes(validVoucherMap[code])) {
+    setAppliedVoucher({ code, discount: 5 });
+    message.textContent = `${code} applied successfully. 5% discount added.`;
+    message.style.color = "green";
+    renderCart();
+    renderCheckoutSummary();
+    showToast("Voucher applied");
+  } else {
+    message.textContent = "Invalid or locked voucher code.";
+    message.style.color = "crimson";
+  }
+}
+
 function renderCart() {
   const cartItemsEl = document.getElementById("cartItems");
   const emptyCartEl = document.getElementById("emptyCart");
   const subtotalEl = document.getElementById("subtotal");
   const totalPriceEl = document.getElementById("totalPrice");
   const deliveryEl = document.getElementById("deliveryFee");
+  const discountEl = document.getElementById("discountAmount");
 
   if (!cartItemsEl) return;
 
@@ -80,6 +128,7 @@ function renderCart() {
   if (cart.length === 0) {
     emptyCartEl?.classList.remove("hidden");
     if (subtotalEl) subtotalEl.textContent = "RM 0.00";
+    if (discountEl) discountEl.textContent = "RM 0.00";
     if (totalPriceEl) totalPriceEl.textContent = "RM 0.00";
     if (deliveryEl) deliveryEl.textContent = "RM 5.00";
     return;
@@ -111,8 +160,11 @@ function renderCart() {
     cartItemsEl.appendChild(itemEl);
   });
 
-  const total = subtotal + DELIVERY_FEE;
+  const discount = calculateDiscount(subtotal);
+  const total = subtotal - discount + DELIVERY_FEE;
+
   if (subtotalEl) subtotalEl.textContent = `RM ${subtotal.toFixed(2)}`;
+  if (discountEl) discountEl.textContent = `- RM ${discount.toFixed(2)}`;
   if (totalPriceEl) totalPriceEl.textContent = `RM ${total.toFixed(2)}`;
 }
 
@@ -141,6 +193,7 @@ function removeItem(index) {
 
 function clearCart() {
   localStorage.removeItem("ecoloveaCart");
+  clearAppliedVoucher();
   updateCartCount();
   renderCart();
   renderCheckoutSummary();
@@ -151,6 +204,7 @@ function renderCheckoutSummary() {
   const itemsEl = document.getElementById("checkoutItems");
   const subtotalEl = document.getElementById("checkoutSubtotal");
   const totalEl = document.getElementById("checkoutTotal");
+  const discountEl = document.getElementById("checkoutDiscount");
   if (!itemsEl) return;
 
   const cart = getCart();
@@ -161,6 +215,7 @@ function renderCheckoutSummary() {
   if (cart.length === 0) {
     itemsEl.innerHTML = `<p class="small-text">No items in cart.</p>`;
     subtotalEl.textContent = "RM 0.00";
+    if (discountEl) discountEl.textContent = "RM 0.00";
     totalEl.textContent = "RM 5.00";
     return;
   }
@@ -176,8 +231,12 @@ function renderCheckoutSummary() {
     itemsEl.appendChild(row);
   });
 
+  const discount = calculateDiscount(subtotal);
+  const total = subtotal - discount + DELIVERY_FEE;
+
   subtotalEl.textContent = `RM ${subtotal.toFixed(2)}`;
-  totalEl.textContent = `RM ${(subtotal + DELIVERY_FEE).toFixed(2)}`;
+  if (discountEl) discountEl.textContent = `- RM ${discount.toFixed(2)}`;
+  totalEl.textContent = `RM ${total.toFixed(2)}`;
 }
 
 function openCartCheckoutNotice() {
@@ -267,15 +326,29 @@ function renderVouchers() {
     countEl.textContent = vouchers.length;
   }
 
+  const codeMap = {
+    1: "ECO5A1",
+    2: "ECO5A2",
+    3: "ECO5A3",
+    4: "ECO5A4",
+    5: "ECO5A5"
+  };
+
   for (let i = 1; i <= 5; i++) {
     const el = document.getElementById(`voucher${i}`);
+    const box = document.getElementById(`voucherBox${i}`);
     if (el) {
       if (vouchers.includes(i)) {
         el.textContent = `Voucher ${i}: Unlocked`;
         el.style.color = "green";
+        if (box) {
+          box.classList.remove("hidden");
+          box.innerHTML = `<strong>Voucher Code:</strong> ${codeMap[i]} <br><span class="small-note">Use this in cart page for 5% off.</span>`;
+        }
       } else {
         el.textContent = `Voucher ${i}: Locked`;
         el.style.color = "";
+        if (box) box.classList.add("hidden");
       }
     }
   }
