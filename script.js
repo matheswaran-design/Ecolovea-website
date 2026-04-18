@@ -46,9 +46,12 @@ function quickAdd(name, price, image) {
 function changeQty(id, change) {
   const el = document.getElementById(id);
   if (!el) return;
+
   let qty = parseInt(el.textContent, 10);
   qty += change;
+
   if (qty < 1) qty = 1;
+
   el.textContent = qty;
 }
 
@@ -80,12 +83,14 @@ function updateCartCount() {
 function calculateDiscount(subtotal) {
   const voucher = getAppliedVoucher();
   if (!voucher) return 0;
+
   return subtotal * (voucher.discount / 100);
 }
 
 function applyVoucher() {
   const input = document.getElementById("voucherCode");
   const message = document.getElementById("voucherMessage");
+
   if (!input || !message) return;
 
   const code = input.value.trim().toUpperCase();
@@ -101,8 +106,10 @@ function applyVoucher() {
 
   if (validVoucherMap[code] && unlocked.includes(validVoucherMap[code])) {
     setAppliedVoucher({ code, discount: 5 });
+
     message.textContent = `${code} applied successfully. 5% discount added.`;
     message.style.color = "green";
+
     renderCart();
     renderCheckoutSummary();
     showToast("Voucher applied");
@@ -127,10 +134,12 @@ function renderCart() {
 
   if (cart.length === 0) {
     emptyCartEl?.classList.remove("hidden");
+
     if (subtotalEl) subtotalEl.textContent = "RM 0.00";
     if (discountEl) discountEl.textContent = "- RM 0.00";
     if (totalPriceEl) totalPriceEl.textContent = "RM 0.00";
     if (deliveryEl) deliveryEl.textContent = "RM 5.00";
+
     return;
   }
 
@@ -157,6 +166,7 @@ function renderCart() {
       </div>
       <strong>RM ${(item.price * item.quantity).toFixed(2)}</strong>
     `;
+
     cartItemsEl.appendChild(itemEl);
   });
 
@@ -170,9 +180,11 @@ function renderCart() {
 
 function updateItemQuantity(index, change) {
   const cart = getCart();
+
   if (!cart[index]) return;
 
   cart[index].quantity += change;
+
   if (cart[index].quantity <= 0) {
     cart.splice(index, 1);
   }
@@ -184,7 +196,9 @@ function updateItemQuantity(index, change) {
 
 function removeItem(index) {
   const cart = getCart();
+
   cart.splice(index, 1);
+
   saveCart(cart);
   renderCart();
   renderCheckoutSummary();
@@ -194,6 +208,7 @@ function removeItem(index) {
 function clearCart() {
   localStorage.removeItem("ecoloveaCart");
   clearAppliedVoucher();
+
   updateCartCount();
   renderCart();
   renderCheckoutSummary();
@@ -205,6 +220,7 @@ function renderCheckoutSummary() {
   const subtotalEl = document.getElementById("checkoutSubtotal");
   const totalEl = document.getElementById("checkoutTotal");
   const discountEl = document.getElementById("checkoutDiscount");
+
   if (!itemsEl) return;
 
   const cart = getCart();
@@ -214,20 +230,24 @@ function renderCheckoutSummary() {
 
   if (cart.length === 0) {
     itemsEl.innerHTML = `<p class="small-text">No items in cart.</p>`;
+
     if (subtotalEl) subtotalEl.textContent = "RM 0.00";
     if (discountEl) discountEl.textContent = "- RM 0.00";
     if (totalEl) totalEl.textContent = "RM 5.00";
+
     return;
   }
 
   cart.forEach(item => {
     subtotal += item.price * item.quantity;
+
     const row = document.createElement("div");
     row.className = "summary-row";
     row.innerHTML = `
       <span>${item.name} × ${item.quantity}</span>
       <span>RM ${(item.price * item.quantity).toFixed(2)}</span>
     `;
+
     itemsEl.appendChild(row);
   });
 
@@ -241,6 +261,7 @@ function renderCheckoutSummary() {
 
 function openCartCheckoutNotice() {
   const modal = document.getElementById("cartCheckoutModal");
+
   if (modal) {
     modal.classList.remove("hidden");
   }
@@ -248,21 +269,30 @@ function openCartCheckoutNotice() {
 
 function goToCheckoutFromCart() {
   const modal = document.getElementById("cartCheckoutModal");
+
   if (modal) {
     modal.classList.add("hidden");
   }
+
   window.location.href = "checkout.html";
 }
 
 function handleFakeCheckout(event) {
   event.preventDefault();
+
   const modal = document.getElementById("checkoutModal");
-  if (modal) modal.classList.remove("hidden");
+
+  if (modal) {
+    modal.classList.remove("hidden");
+  }
 }
 
 function closeModal() {
   const modal = document.getElementById("checkoutModal");
-  if (modal) modal.classList.add("hidden");
+
+  if (modal) {
+    modal.classList.add("hidden");
+  }
 }
 
 function handleSignup(event) {
@@ -282,9 +312,13 @@ function handleSignup(event) {
   }
 
   const user = { email, username, password };
+
   localStorage.setItem("ecoloveaUser", JSON.stringify(user));
+
   message.textContent = "Account created successfully.";
   message.style.color = "green";
+
+  event.target.reset();
 }
 
 function handleLogin(event) {
@@ -306,12 +340,27 @@ function handleLogin(event) {
   }
 }
 
+function handleContactForm(event) {
+  event.preventDefault();
+
+  const message = document.getElementById("contactFormMessage");
+
+  if (!message) return;
+
+  message.textContent = "Thank you for contacting Ecolovea. This form is for educational purposes only.";
+  message.style.color = "green";
+
+  event.target.reset();
+}
+
 function markArticleOpened(articleNumber) {
   let opened = JSON.parse(localStorage.getItem("ecoloveaOpenedArticles")) || [];
+
   if (!opened.includes(articleNumber)) {
     opened.push(articleNumber);
     localStorage.setItem("ecoloveaOpenedArticles", JSON.stringify(opened));
   }
+
   setTimeout(() => {
     renderVoucherUnlockButtons();
   }, 300);
@@ -319,6 +368,7 @@ function markArticleOpened(articleNumber) {
 
 function unlockVoucherAfterView(articleNumber) {
   let opened = JSON.parse(localStorage.getItem("ecoloveaOpenedArticles")) || [];
+
   if (!opened.includes(articleNumber)) {
     showToast("Please view the article first");
     return;
@@ -342,6 +392,7 @@ function renderVoucherUnlockButtons() {
 
   for (let i = 1; i <= 5; i++) {
     const btn = document.getElementById(`unlockBtn${i}`);
+
     if (!btn) continue;
 
     if (opened.includes(i) && !vouchers.includes(i)) {
@@ -371,24 +422,32 @@ function renderVouchers() {
   for (let i = 1; i <= 5; i++) {
     const el = document.getElementById(`voucher${i}`);
     const box = document.getElementById(`voucherBox${i}`);
+
     if (el) {
       if (vouchers.includes(i)) {
         el.textContent = `Voucher ${i}: Unlocked`;
         el.style.color = "green";
+
         if (box) {
           box.classList.remove("hidden");
-          box.innerHTML = `<strong>Voucher Code:</strong> ${codeMap[i]} <br><span class="small-note">Use this in cart page for 5% off.</span>`;
+          box.innerHTML = `
+            <strong>Voucher Code:</strong> ${codeMap[i]} 
+            <br>
+            <span class="small-note">Use this in cart page for 5% off.</span>
+          `;
         }
       } else {
         el.textContent = `Voucher ${i}: Locked`;
         el.style.color = "";
-        if (box) box.classList.add("hidden");
+
+        if (box) {
+          box.classList.add("hidden");
+        }
       }
     }
   }
 }
 
-/* NIGHT MODE FIXED */
 function initTheme() {
   const savedTheme = localStorage.getItem("ecoloveaTheme");
   const themeBtn = document.getElementById("themeToggle");
@@ -416,6 +475,7 @@ function initTheme() {
 function initMenu() {
   const menuBtn = document.getElementById("menuToggle");
   const nav = document.getElementById("navMenu");
+
   if (menuBtn && nav) {
     menuBtn.addEventListener("click", () => {
       nav.classList.toggle("show");
@@ -439,8 +499,12 @@ window.addEventListener("click", function (e) {
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     closeModal();
+
     const cartModal = document.getElementById("cartCheckoutModal");
-    if (cartModal) cartModal.classList.add("hidden");
+
+    if (cartModal) {
+      cartModal.classList.add("hidden");
+    }
   }
 });
 
