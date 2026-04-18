@@ -25,6 +25,7 @@
         <a href="cart.html">Cart <span id="cartCount" class="cart-count">0</span></a>
         <a href="about.html">About</a>
         <a href="blog.html" class="active">Blog</a>
+        <a href="contact.html">Contact</a>
       </nav>
 
       <div class="nav-actions">
@@ -42,7 +43,7 @@
       <div class="section-title">
         <h1>Environmental Awareness Blog</h1>
         <p>
-          Read our environmental awareness articles and unlock 5% vouchers.
+          Open an article, read it, then return here and unlock your 5% voucher.
         </p>
       </div>
 
@@ -56,9 +57,18 @@
         <article class="info-box">
           <h2>Article 1</h2>
           <p>Plastic pollution and its long-term impact on the environment.</p>
-          <a class="btn btn-primary" href="https://www.unep.org/plastic-pollution" target="_blank" rel="noopener" onclick="unlockVoucher(1)">
-            Read Article & Unlock Voucher
+          <a
+            class="btn btn-primary"
+            href="https://www.unep.org/plastic-pollution"
+            target="_blank"
+            rel="noopener"
+            onclick="markArticleOpened(1)"
+          >
+            View Article
           </a>
+          <button class="btn btn-secondary article-unlock-btn hidden" id="unlockBtn1" onclick="unlockVoucherAfterView(1)">
+            Unlock Voucher
+          </button>
           <p id="voucher1" class="voucher-status">Voucher 1: Locked</p>
           <div id="voucherBox1" class="voucher-box hidden">
             <strong>Voucher Code:</strong> ECO5A1
@@ -68,9 +78,18 @@
         <article class="info-box">
           <h2>Article 2</h2>
           <p>Why reusable daily products matter in sustainable living.</p>
-          <a class="btn btn-primary" href="https://www.worldwildlife.org/threats/plastic-pollution" target="_blank" rel="noopener" onclick="unlockVoucher(2)">
-            Read Article & Unlock Voucher
+          <a
+            class="btn btn-primary"
+            href="https://www.worldwildlife.org/threats/plastic-pollution"
+            target="_blank"
+            rel="noopener"
+            onclick="markArticleOpened(2)"
+          >
+            View Article
           </a>
+          <button class="btn btn-secondary article-unlock-btn hidden" id="unlockBtn2" onclick="unlockVoucherAfterView(2)">
+            Unlock Voucher
+          </button>
           <p id="voucher2" class="voucher-status">Voucher 2: Locked</p>
           <div id="voucherBox2" class="voucher-box hidden">
             <strong>Voucher Code:</strong> ECO5A2
@@ -80,9 +99,18 @@
         <article class="info-box">
           <h2>Article 3</h2>
           <p>How small daily habits can help reduce environmental waste.</p>
-          <a class="btn btn-primary" href="https://www.nationalgeographic.com/environment/article/plastic-pollution" target="_blank" rel="noopener" onclick="unlockVoucher(3)">
-            Read Article & Unlock Voucher
+          <a
+            class="btn btn-primary"
+            href="https://www.nationalgeographic.com/environment/article/plastic-pollution"
+            target="_blank"
+            rel="noopener"
+            onclick="markArticleOpened(3)"
+          >
+            View Article
           </a>
+          <button class="btn btn-secondary article-unlock-btn hidden" id="unlockBtn3" onclick="unlockVoucherAfterView(3)">
+            Unlock Voucher
+          </button>
           <p id="voucher3" class="voucher-status">Voucher 3: Locked</p>
           <div id="voucherBox3" class="voucher-box hidden">
             <strong>Voucher Code:</strong> ECO5A3
@@ -92,9 +120,18 @@
         <article class="info-box">
           <h2>Article 4</h2>
           <p>The role of sustainable consumption in modern lifestyles.</p>
-          <a class="btn btn-primary" href="https://www.un.org/sustainabledevelopment/sustainable-consumption-production/" target="_blank" rel="noopener" onclick="unlockVoucher(4)">
-            Read Article & Unlock Voucher
+          <a
+            class="btn btn-primary"
+            href="https://www.un.org/sustainabledevelopment/sustainable-consumption-production/"
+            target="_blank"
+            rel="noopener"
+            onclick="markArticleOpened(4)"
+          >
+            View Article
           </a>
+          <button class="btn btn-secondary article-unlock-btn hidden" id="unlockBtn4" onclick="unlockVoucherAfterView(4)">
+            Unlock Voucher
+          </button>
           <p id="voucher4" class="voucher-status">Voucher 4: Locked</p>
           <div id="voucherBox4" class="voucher-box hidden">
             <strong>Voucher Code:</strong> ECO5A4
@@ -104,9 +141,18 @@
         <article class="info-box">
           <h2>Article 5</h2>
           <p>How businesses can contribute to a greener future.</p>
-          <a class="btn btn-primary" href="https://www.renewableinstitute.org/corporate-sustainability-renewable-energy-how-businesses-are-transitioning-to-a-greener-future/" target="_blank" rel="noopener" onclick="unlockVoucher(5)">
-            Read Article & Unlock Voucher
+          <a
+            class="btn btn-primary"
+            href="https://www.renewableinstitute.org/corporate-sustainability-renewable-energy-how-businesses-are-transitioning-to-a-greener-future/"
+            target="_blank"
+            rel="noopener"
+            onclick="markArticleOpened(5)"
+          >
+            View Article
           </a>
+          <button class="btn btn-secondary article-unlock-btn hidden" id="unlockBtn5" onclick="unlockVoucherAfterView(5)">
+            Unlock Voucher
+          </button>
           <p id="voucher5" class="voucher-status">Voucher 5: Locked</p>
           <div id="voucherBox5" class="voucher-box hidden">
             <strong>Voucher Code:</strong> ECO5A5
@@ -122,13 +168,17 @@
         <h3>Ecolovea</h3>
         <p>Affordable eco-friendly essentials for greener everyday living.</p>
       </div>
+
       <div>
         <h4>Quick Links</h4>
         <a href="index.html">Home</a>
         <a href="products.html">Products</a>
-        <a href="about.html">About</a>
         <a href="cart.html">Cart</a>
+        <a href="about.html">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
       </div>
+
       <div>
         <h4>Follow Us</h4>
         <div class="social-icons">
@@ -143,6 +193,10 @@
           </a>
         </div>
       </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Ecolovea. All Rights Reserved.</p>
     </div>
   </footer>
 
