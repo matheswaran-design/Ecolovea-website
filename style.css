@@ -22,8 +22,13 @@ body.dark {
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -281,6 +286,10 @@ a {
   color: var(--text);
 }
 
+.article-unlock-btn {
+  margin-top: 10px;
+}
+
 .feature-icon {
   width: 58px;
   height: 58px;
@@ -299,18 +308,34 @@ a {
 .product-card {
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
 }
 
+.product-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px 16px 0 0;
+  background: #f2f2f2;
+}
+
 .product-info {
   padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .product-info h3 {
   margin: 0 0 8px;
+  min-height: 48px;
 }
 
 .price {
@@ -375,6 +400,10 @@ a {
   opacity: 0.9;
 }
 
+.product-info .btn {
+  margin-top: auto;
+}
+
 .full-width {
   width: 100%;
   text-align: center;
@@ -420,6 +449,7 @@ a {
   width: 84px;
   height: 84px;
   object-fit: cover;
+  object-position: center;
   border-radius: 14px;
 }
 
@@ -471,7 +501,8 @@ a {
 }
 
 .checkout-form label,
-.auth-card label {
+.auth-card label,
+.contact-form label {
   display: block;
   font-weight: 700;
   margin: 14px 0 8px;
@@ -480,13 +511,19 @@ a {
 .checkout-form input,
 .checkout-form textarea,
 .checkout-form select,
-.auth-card input {
+.auth-card input,
+.contact-form input,
+.contact-form textarea {
   width: 100%;
   padding: 12px 14px;
   border: 1px solid var(--border);
   border-radius: 14px;
   background: var(--bg);
   color: var(--text);
+}
+
+.contact-form textarea {
+  resize: vertical;
 }
 
 .form-grid {
@@ -524,6 +561,52 @@ a {
   padding: 28px;
 }
 
+/* Contact Page */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+
+.contact-info-list {
+  display: grid;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.contact-info-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px;
+  background: var(--accent);
+  border-radius: 16px;
+}
+
+.contact-info-item i {
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-top: 4px;
+}
+
+.contact-info-item h3 {
+  margin: 0 0 4px;
+}
+
+.contact-info-item p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Footer */
 .site-footer {
   margin-top: 30px;
   background: var(--card);
@@ -556,6 +639,18 @@ a {
 
 .social-icons i {
   font-size: 1.1rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 14px 16px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.footer-bottom p {
+  margin: 0;
 }
 
 .toast {
@@ -618,7 +713,8 @@ a {
   .footer-grid,
   .two-col,
   .about-grid,
-  .auth-split {
+  .auth-split,
+  .contact-layout {
     grid-template-columns: 1fr;
   }
 
@@ -658,6 +754,10 @@ a {
     font-size: 2rem;
   }
 
+  .product-card img {
+    height: 220px;
+  }
+
   .product-info,
   .cart-panel,
   .summary-panel,
@@ -665,7 +765,8 @@ a {
   .auth-card,
   .feature-card,
   .info-box,
-  .voucher-banner {
+  .voucher-banner,
+  .contact-card {
     padding: 18px;
   }
 
